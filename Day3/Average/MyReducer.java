@@ -7,7 +7,7 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
 
-public static class MyReducer extends Reducer <IntWritable, FloatWritable, IntWritable, FloatWritable>{
+public class MyReducer extends Reducer <IntWritable, FloatWritable, IntWritable, FloatWritable>{
         @Override
     
         public void reduce (IntWritable key, Iterable<FloatWritable> values, Context context) throws IOException, InterruptedException {
@@ -16,10 +16,10 @@ public static class MyReducer extends Reducer <IntWritable, FloatWritable, IntWr
             String title = "";
 
             for (FloatWritable value: values) {
-                if (value == 2 || value == 3 || value == 5){
-                    sum += value.get();
+                
+                sum += value.get();
                 count = count + 1;
-                }
+                
             }
     
             FloatWritable  value = new FloatWritable(sum/count);
